@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cosmos Sudar — Setup Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --space:#0a0d1c; --space2:#11162a; --line:#1e2542;
+    --ember:#e9a13c; --ember2:#f5c47a; --star:#7db4ea; --green:#25d366;
+    --text:#ece7dd; --dim:#a3a3b5; --faint:#6d7086;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  body{
+    margin:0;background:var(--space);color:var(--text);
+    font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{content:"";position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(ellipse 800px 500px at 15% -5%,rgba(125,180,234,.14),transparent 60%),
+      radial-gradient(ellipse 900px 600px at 85% 3%,rgba(233,161,60,.12),transparent 60%),
+      radial-gradient(ellipse 1000px 700px at 50% 115%,rgba(185,114,42,.14),transparent 62%);}
+  .wrap{max-width:840px;margin:0 auto;padding:0 24px}
+  header.top{padding:64px 0 40px;border-bottom:1px solid var(--line);margin-bottom:8px}
+  .eyebrow{font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ember);font-weight:600;margin-bottom:14px}
+  h1{font-family:"Cormorant Garamond",serif;font-size:clamp(2.4rem,7vw,3.8rem);line-height:1.05;margin:0 0 14px;font-weight:600;color:#fff}
+  .lede{font-size:1.12rem;color:var(--dim);margin:0;max-width:60ch}
+
+  h2{font-family:"Cormorant Garamond",serif;font-size:clamp(1.7rem,4.5vw,2.4rem);font-weight:600;color:#fff;
+     margin:56px 0 6px;line-height:1.15;display:flex;align-items:baseline;gap:14px}
+  h2 .n{font-family:Inter,sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;
+        color:var(--space);background:var(--ember);border-radius:100px;padding:5px 12px;flex-shrink:0;
+        position:relative;top:-4px}
+  h3{font-size:1.02rem;font-weight:700;color:var(--ember);margin:32px 0 6px;letter-spacing:.02em}
+  p{margin:14px 0}
+  a{color:var(--star)}
+  strong{color:#fff}
+  ul,ol{padding-left:22px;margin:14px 0}
+  li{margin-bottom:9px}
+  li::marker{color:var(--ember)}
+  code{background:var(--space2);border:1px solid var(--line);padding:.15em .45em;border-radius:4px;
+       font-family:ui-monospace,Menlo,monospace;font-size:.86em;color:var(--ember2);word-break:break-all}
+
+  .card{background:linear-gradient(150deg,rgba(17,22,42,.9),rgba(10,13,28,.5));
+        border:1px solid var(--line);border-radius:6px;padding:22px 24px;margin:22px 0}
+  .card.warn{border-color:rgba(233,161,60,.5);background:rgba(233,161,60,.07)}
+  .card.good{border-color:rgba(37,211,102,.4);background:rgba(37,211,102,.06)}
+  .card h4{margin:0 0 8px;font-size:.98rem;color:#fff;font-weight:700}
+  .card p:last-child{margin-bottom:0}
+  .card p:first-of-type{margin-top:0}
+
+  table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.92rem}
+  th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ember);font-weight:600}
+  td code{font-size:.82em}
+  tbody tr:hover{background:rgba(255,255,255,.02)}
+
+  .steps{counter-reset:s;list-style:none;padding:0;margin:18px 0}
+  .steps>li{counter-increment:s;position:relative;padding-left:42px;margin-bottom:16px}
+  .steps>li::before{content:counter(s);position:absolute;left:0;top:1px;
+    width:27px;height:27px;border-radius:50%;background:var(--space2);border:1px solid var(--line);
+    color:var(--ember);font-size:.78rem;font-weight:700;display:grid;place-items:center}
+
+  .pill{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+        padding:4px 11px;border-radius:100px;background:rgba(37,211,102,.15);color:#4ade80;border:1px solid rgba(37,211,102,.35)}
+  .pill.time{background:rgba(125,180,234,.13);color:var(--star);border-color:rgba(125,180,234,.3)}
+
+  hr{border:0;height:1px;background:var(--line);margin:52px 0}
+  footer{padding:40px 0 70px;color:var(--faint);font-size:.86rem;border-top:1px solid var(--line);margin-top:60px}
+  .toc{background:var(--space2);border:1px solid var(--line);border-radius:6px;padding:20px 24px;margin:32px 0}
+  .toc ol{margin:8px 0 0;padding-left:20px}
+  .toc a{color:var(--text);text-decoration:none}
+  .toc a:hover{color:var(--ember)}
+  @media print{body{background:#fff;color:#000}body::before{display:none}h1,h2,.card h4{color:#000}a{color:#000}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">Cosmos Sudar · Independent Journalism</div>
+  <h1>Your website.<br>Free, forever.</h1>
+  <p class="lede">Everything is already built and sitting in this folder. What follows is how to put it on the internet at <strong>cosmossudar.com</strong>, and how to publish a story every day afterwards. No subscription. No renewal. Not one rupee.</p>
+</header>
+
+<div class="card good">
+  <h4>What this will cost you</h4>
+  <table style="margin:10px 0 0">
+    <tr><td>Website hosting (GitHub Pages)</td><td style="text-align:right"><strong>₹0 forever</strong></td></tr>
+    <tr><td>Rebuilding the site when you publish</td><td style="text-align:right"><strong>₹0 forever</strong></td></tr>
+    <tr><td>Admin panel to write stories (Pages CMS)</td><td style="text-align:right"><strong>₹0 forever</strong></td></tr>
+    <tr><td>HTTPS security certificate</td><td style="text-align:right"><strong>₹0, automatic</strong></td></tr>
+    <tr><td>Unlimited visitors</td><td style="text-align:right"><strong>₹0</strong></td></tr>
+    <tr style="border-bottom:0"><td>Your domain name — you already pay this</td><td style="text-align:right">already yours</td></tr>
+  </table>
+  <p style="margin-top:14px;color:var(--dim);font-size:.9rem">These are not free trials. GitHub Pages has been free for public projects since 2008 and is used by millions of sites. There is no card to enter anywhere in this guide.</p>
+</div>
+
+<div class="toc">
+  <strong style="font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ember)">What you will do</strong>
+  <ol>
+    <li><a href="#s0">Change two things in your folder first</a></li>
+    <li><a href="#s1">Make a free GitHub account</a></li>
+    <li><a href="#s2">Upload your website</a></li>
+    <li><a href="#s3">Switch the website on</a></li>
+    <li><a href="#s4">Point cosmossudar.com at it</a></li>
+    <li><a href="#s5">Set up your writing panel</a></li>
+    <li><a href="#s6">Publish a story — your daily routine</a></li>
+    <li><a href="#s7">When something goes wrong</a></li>
+  </ol>
+</div>
+
+<h2 id="s0"><span class="n">Step 1</span> Change two things first</h2>
+<p>Before anything goes online, two details in the folder are placeholders and need your real information.</p>
+
+<div class="card warn">
+  <h4>⚠ Your WhatsApp number is fake right now</h4>
+  <p>Open the file <code>site.json</code> in this folder (double-click it; if it asks which app, choose TextEdit or Notepad). Find this line:</p>
+  <p><code>"whatsapp_number": "919999999999",</code></p>
+  <p>Replace it with your real number — <strong>country code first, digits only, no plus sign, no spaces</strong>. For an Indian number 98765 43210, you would write <code>"whatsapp_number": "919876543210",</code></p>
+  <p>Do the same for <code>"instagram"</code>, <code>"youtube"</code> and <code>"twitter"</code> — put your real profile links there, or leave the quotes empty like <code>""</code> if you do not have one. Those buttons then simply do not appear.</p>
+  <p style="color:var(--dim);font-size:.9rem"><strong>Careful:</strong> keep every quotation mark and comma exactly where it is. Those are the only rule in that file.</p>
+</div>
+
+<h3>Delete the sample stories when you are ready</h3>
+<p>Inside <code>content/news/</code> there are five stories with <code>sample</code> in the file name. They exist so the website does not look empty while you set it up. Delete them once you have written two or three of your own. Leave <code>_TEMPLATE.md</code> alone — it is your blank form, and it never appears on the website.</p>
+
+<h2 id="s1"><span class="n">Step 2</span> Make a free GitHub account</h2>
+<p>GitHub is where your website will live. Think of it as a free filing cabinet that also happens to publish to the internet.</p>
+<ol class="steps">
+  <li>Go to <a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup</a></li>
+  <li>Use <strong>news@cosmossudar.com</strong> as the email, so everything sits under your own domain.</li>
+  <li>Pick a username. Something like <code>cosmossudar</code>. It will be visible, so keep it clean.</li>
+  <li>Choose the <strong>Free</strong> plan when it asks. Never choose anything else. If a page ever asks for a card, you have taken a wrong turn — go back.</li>
+  <li>Confirm the email they send you.</li>
+</ol>
+<p><span class="pill time">about 5 minutes</span></p>
+
+<h2 id="s2"><span class="n">Step 3</span> Upload your website</h2>
+<ol class="steps">
+  <li>Signed in to GitHub, click the <strong>+</strong> at the top right → <strong>New repository</strong>.</li>
+  <li>Repository name: <code>cosmossudar-website</code></li>
+  <li>Set it to <strong>Public</strong>. This matters — free hosting and free rebuilds only apply to public projects. Public means people can read the code, not that they can change it. Only you can change it.</li>
+  <li>Do not tick "Add a README file". Leave all the tick-boxes empty.</li>
+  <li>Click <strong>Create repository</strong>.</li>
+  <li>On the next screen click the link <strong>uploading an existing file</strong>.</li>
+  <li>Open this folder on your computer. Select <em>everything inside it</em> — the <code>assets</code>, <code>content</code> and <code>.github</code> folders, plus <code>build.py</code>, <code>site.json</code>, <code>.pages.yml</code>, <code>CNAME</code> and <code>.gitignore</code>. Drag them all onto the GitHub page.</li>
+  <li>Wait for the upload bars to finish, then click <strong>Commit changes</strong> at the bottom.</li>
+</ol>
+
+<div class="card warn">
+  <h4>If the .github folder refuses to upload</h4>
+  <p>Folders starting with a dot are hidden on Mac and Windows, and browsers sometimes skip them. If <code>.github</code> did not make it, create it by hand: click <strong>Add file → Create new file</strong>, and in the name box type exactly <code>.github/workflows/publish.yml</code> — typing the slashes creates the folders for you. Then open <code>.github/workflows/publish.yml</code> from your folder in TextEdit or Notepad, copy everything, paste it in, and commit.</p>
+  <p>On a Mac you can reveal hidden files in Finder by pressing <strong>Command + Shift + Full stop</strong>.</p>
+</div>
+
+<h2 id="s3"><span class="n">Step 4</span> Switch the website on</h2>
+<ol class="steps">
+  <li>In your repository, click <strong>Settings</strong> (top row of tabs).</li>
+  <li>In the left sidebar, click <strong>Pages</strong>.</li>
+  <li>Under <strong>Source</strong>, open the dropdown and choose <strong>GitHub Actions</strong>. Not "Deploy from a branch" — <strong>GitHub Actions</strong>.</li>
+  <li>Click the <strong>Actions</strong> tab at the top. You will see a job called "Publish website" running. Give it about a minute to turn into a green tick.</li>
+  <li>Go back to <strong>Settings → Pages</strong>. Your website address is now shown at the top. Click it. Your site is live.</li>
+</ol>
+<div class="card good">
+  <p style="margin:0">At this point the site works at an address like <code>cosmossudar.github.io/cosmossudar-website</code>. The next step gives it your real name.</p>
+</div>
+
+<h2 id="s4"><span class="n">Step 5</span> Point cosmossudar.com at it</h2>
+<p>Two halves: tell GitHub your domain, then tell your domain about GitHub.</p>
+
+<h3>Half one — on GitHub</h3>
+<ol class="steps">
+  <li><strong>Settings → Pages</strong> again.</li>
+  <li>Under <strong>Custom domain</strong>, type <code>cosmossudar.com</code> and click <strong>Save</strong>.</li>
+</ol>
+
+<h3>Half two — where your domain is registered</h3>
+<p>Sign in wherever you bought or manage cosmossudar.com. If it came bundled with your Google Workspace subscription, that will usually be <strong>Squarespace Domains</strong> (which took over Google Domains) — check your original purchase email. Find the section called <strong>DNS</strong>, <strong>DNS records</strong> or <strong>Manage custom records</strong>, and add these <strong>eight</strong> records.</p>
+
+<table>
+  <thead><tr><th>Type</th><th>Name / Host</th><th>Value / Points to</th></tr></thead>
+  <tbody>
+    <tr><td>A</td><td><code>@</code></td><td><code>185.199.108.153</code></td></tr>
+    <tr><td>A</td><td><code>@</code></td><td><code>185.199.109.153</code></td></tr>
+    <tr><td>A</td><td><code>@</code></td><td><code>185.199.110.153</code></td></tr>
+    <tr><td>A</td><td><code>@</code></td><td><code>185.199.111.153</code></td></tr>
+    <tr><td>AAAA</td><td><code>@</code></td><td><code>2606:50c0:8000::153</code></td></tr>
+    <tr><td>AAAA</td><td><code>@</code></td><td><code>2606:50c0:8001::153</code></td></tr>
+    <tr><td>AAAA</td><td><code>@</code></td><td><code>2606:50c0:8002::153</code></td></tr>
+    <tr><td>AAAA</td><td><code>@</code></td><td><code>2606:50c0:8003::153</code></td></tr>
+  </tbody>
+</table>
+
+<p>Then add one more so that <strong>www.cosmossudar.com</strong> also works:</p>
+<table>
+  <thead><tr><th>Type</th><th>Name / Host</th><th>Value / Points to</th></tr></thead>
+  <tbody>
+    <tr><td>CNAME</td><td><code>www</code></td><td><code>YOUR-USERNAME.github.io</code></td></tr>
+  </tbody>
+</table>
+<p style="color:var(--dim);font-size:.92rem">Replace <code>YOUR-USERNAME</code> with the GitHub username you chose. Note there is <em>no</em> repository name in that value — just the username, then <code>.github.io</code>.</p>
+
+<div class="card warn">
+  <h4>⚠ Do not touch your MX records</h4>
+  <p>Your MX records are what deliver mail to <strong>news@cosmossudar.com</strong>. The records above are A, AAAA and CNAME records — completely separate. Add the new ones, change nothing else, and your Google email keeps working exactly as it does today.</p>
+  <p>If your registrar has already put a default A record or a "parking" / "forwarding" record on <code>@</code>, delete that one. It will fight with these.</p>
+</div>
+
+<ol class="steps">
+  <li>Save the records and wait. Usually 15 minutes to an hour; the outside limit is 24 hours.</li>
+  <li>Come back to <strong>Settings → Pages</strong>. Once GitHub shows a green tick beside your domain, tick <strong>Enforce HTTPS</strong>. That gives you the padlock, free. If the tick-box is greyed out, it is not ready yet — check again in a few hours.</li>
+</ol>
+<p><span class="pill time">15 minutes of work, then waiting</span></p>
+
+<h2 id="s5"><span class="n">Step 6</span> Set up your writing panel</h2>
+<p>This is what replaces Wix's editor. A proper form with a photo upload button, free, that works on your phone as well as your laptop.</p>
+<ol class="steps">
+  <li>Go to <a href="https://pagescms.org" target="_blank" rel="noopener">pagescms.org</a> and click <strong>Sign in with GitHub</strong>.</li>
+  <li>Allow it to see your repositories. When it asks which, choose <strong>only</strong> <code>cosmossudar-website</code> — not all of them.</li>
+  <li>Open that project. It reads the <code>.pages.yml</code> file already in your folder, so your form appears ready-made with the right boxes: Headline, Date, Section, Place, Summary, Main photo, and the story itself.</li>
+  <li>Bookmark that page on your phone's home screen. That is your newsroom now.</li>
+</ol>
+<div class="card">
+  <h4>You are never locked in</h4>
+  <p>Pages CMS is one convenient door, not the building. Your stories are ordinary text files sitting in your own GitHub account. If Pages CMS ever shuts down or starts charging, you lose nothing — you edit the same files directly on GitHub's own website, or switch to any other tool. That is the difference between this and Wix.</p>
+</div>
+
+<h2 id="s6"><span class="n">Step 7</span> Publish a story</h2>
+<p>Your daily routine, start to finish:</p>
+<ol class="steps">
+  <li>Open your Pages CMS bookmark.</li>
+  <li>Click <strong>News Stories → Add new</strong>.</li>
+  <li>Fill in the headline, pick the date and section, and write a two-sentence summary. <em>The summary is what people see in the WhatsApp preview when your story is shared — spend a moment on it.</em></li>
+  <li>Upload your main photo. Landscape photos look best. Straight from the phone is fine.</li>
+  <li>Write the story in the big box at the bottom.</li>
+  <li>Click <strong>Save</strong>.</li>
+  <li>Wait about a minute. The story is live on cosmossudar.com. Nothing else to press.</li>
+</ol>
+
+<h3>Writing it directly on GitHub instead</h3>
+<p>If you would rather skip the panel: go to your repository, open <code>content/news/</code>, click <strong>Add file → Create new file</strong>, and name it in this pattern — <code>2026-08-12-water-shortage-poonamallee.md</code>. Copy the contents of <code>_TEMPLATE.md</code> as your starting point. Both routes produce exactly the same result.</p>
+
+<h3>Keeping something as a draft</h3>
+<p>Turn on <strong>Keep as draft</strong> in the panel (or write <code>draft: true</code> at the top of the file). The story stays invisible to the public until you turn it off. Useful for writing over several days.</p>
+
+<h3>Making a correction</h3>
+<p>Open the story, fix the sentence, save. It updates within a minute. Your published ethics page promises corrections are noted at the bottom of the story with a date — add a line like <code>**Correction, 14 August 2026:** an earlier version said 43 acres. The figure is 34 acres.</code> at the end.</p>
+
+<h2 id="s7"><span class="n">Step 8</span> When something goes wrong</h2>
+
+<h3>I published, but nothing changed on the website</h3>
+<p>Go to your repository → <strong>Actions</strong> tab. Look at the most recent run. A green tick means it published — try refreshing the page with <strong>Ctrl+Shift+R</strong> (or <strong>Cmd+Shift+R</strong> on Mac) to clear the old copy from your browser. A red cross means the build failed; click it to see which story it stopped on. It is almost always a missing <code>---</code> line, or a date written in the wrong shape. Fix that story and it publishes itself.</p>
+
+<h3>The site is up but the design is missing</h3>
+<p>Usually the <code>assets</code> folder did not upload fully. Check that <code>assets/css/style.css</code> exists in your repository.</p>
+
+<h3>cosmossudar.com shows an error or someone else's page</h3>
+<p>DNS has not finished spreading, or an old parking record is still in place. Wait a few hours, then re-check that no leftover A record points somewhere else.</p>
+
+<h3>My email stopped working</h3>
+<p>Then an MX record was changed or deleted. Go back to your DNS page and restore Google's MX records — Google Workspace admin help has the exact list. The records in this guide never touch mail.</p>
+
+<div class="card">
+  <h4>Seeing the site before it goes online</h4>
+  <p>Open the <code>_site</code> folder inside this folder and double-click <code>index.html</code>. The whole website opens in your browser — every page, every link, working, with nothing published and no internet needed. Do this now, before you start Step 2.</p>
+  <p style="color:var(--dim);font-size:.9rem">The only part that will not work offline is the search box on the All Stories page, which needs a real web address. Everything else is exactly what visitors will see.</p>
+</div>
+
+<hr>
+
+<h2 style="margin-top:0">What you now have</h2>
+<ul>
+  <li>A front page that puts your latest report large, with three more beside it.</li>
+  <li>A real page for every story, with its own web address, so sharing to WhatsApp and Instagram produces a proper preview card with your photo and headline.</li>
+  <li>Sections for Ground Report, Civic Issues, Environment, Politics and Explainer — change or add to these in <code>site.json</code>.</li>
+  <li>WhatsApp, Instagram and email buttons floating on every page, and a contact page explaining how to send a tip safely.</li>
+  <li>An About page and a published Ethics &amp; Corrections policy — the two things readers and other journalists look for before they trust an independent outlet.</li>
+  <li>Tamil and English working side by side in the same story, with the right font for each.</li>
+  <li>An RSS feed, a sitemap and Google-friendly tags, so your reporting is findable.</li>
+  <li>Every story readable on a phone, which is how nearly everyone will read it.</li>
+</ul>
+
+<h3>Things worth doing in the first week</h3>
+<ul>
+  <li>Put your real WhatsApp number in <code>site.json</code> — right now it is a placeholder and the button goes nowhere.</li>
+  <li>Replace the five sample stories with your own.</li>
+  <li>Read through the About and Ethics pages and make them sound like you, not like me. They are in <code>content/pages/</code>.</li>
+  <li>Add the site link to your Instagram bio.</li>
+  <li>Submit cosmossudar.com to <a href="https://search.google.com/search-console" target="_blank" rel="noopener">Google Search Console</a> — free, and it is how Google learns your site exists.</li>
+</ul>
+
+<footer>
+  Built for Thirumalaiselvan · Cosmos Sudar · August 2026<br>
+  Plain HTML, CSS and one Python file. No frameworks, no accounts, no expiry.
+</footer>
+
+</div>
+</body>
+</html>

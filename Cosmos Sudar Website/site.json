@@ -1,0 +1,30 @@
+{
+  "_comment": "EDIT THIS FILE to change your site name, links and contact details. Nothing else needs to change. Keep the quotes and commas exactly as they are.",
+
+  "site_name": "Cosmos Sudar",
+  "site_name_tamil": "காஸ்மோஸ் சுடர்",
+  "tagline": "Independent journalism from the ground up",
+  "tagline_tamil": "மக்கள் பக்கம் நிற்கும் சுதந்திர பத்திரிகை",
+  "description": "Independent, ad-free journalism by Thirumalaiselvan. Ground reports from Tamil Nadu's constituencies, civic issues, environment and public accountability.",
+
+  "url": "https://cosmossudar.com",
+  "author": "Thirumalaiselvan",
+  "author_role": "Founder & Independent Journalist",
+  "author_bio": "I travel Tamil Nadu constituency by constituency, documenting what actually happens on the ground — roads, water, schools, forests, and the people who live with the consequences. No advertisers. No political funding. Just reporting.",
+  "author_bio_tamil": "தமிழ்நாட்டின் ஒவ்வொரு தொகுதியாகச் சென்று, தரையில் நடப்பதை ஆவணப்படுத்துகிறேன் — சாலைகள், தண்ணீர், பள்ளிகள், காடுகள், மற்றும் அதன் விளைவுகளோடு வாழும் மக்கள். விளம்பரம் இல்லை. அரசியல் நிதி இல்லை. வெறும் செய்தி.",
+
+  "email": "news@cosmossudar.com",
+  "whatsapp_number": "918489644273",
+  "whatsapp_message": "Hi Cosmos Sudar, I have a news tip.",
+  "instagram": "https://www.instagram.com/cosmossudar/",
+  "twitter": "https://x.com/cosmossudar",
+  "facebook": "",
+
+  "categories": [
+    { "id": "ground-report", "name": "Ground Report", "name_tamil": "களச் செய்தி" },
+    { "id": "civic", "name": "Civic Issues", "name_tamil": "நகர்ப்புற பிரச்சினைகள்" },
+    { "id": "environment", "name": "Environment", "name_tamil": "சுற்றுச்சூழல்" },
+    { "id": "politics", "name": "Politics", "name_tamil": "அரசியல்" },
+    { "id": "explainer", "name": "Explainer", "name_tamil": "விளக்கம்" }
+  ]
+}
